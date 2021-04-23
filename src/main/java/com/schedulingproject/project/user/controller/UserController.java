@@ -23,7 +23,7 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers(){
         List<User> users = userService.getAllUsers();
-        if (!users.isEmpty()) {
+        if (users.isEmpty()) {
             throw new HomeNotFoundException("No users founded: ");
         }
         return new ResponseEntity<>(users, HttpStatus.OK);
