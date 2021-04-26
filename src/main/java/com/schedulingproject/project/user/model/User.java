@@ -2,20 +2,20 @@ package com.schedulingproject.project.user.model;
 
 import com.schedulingproject.project.user.dto.UserDTO;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String mail;
+    private Long dtinsert;
+    private Long dtupdate;
 
     public User() {
     }
@@ -51,16 +51,42 @@ public class User {
         this.mail = mail;
     }
 
+    public Long getDtinsert() {
+        return dtinsert;
+    }
+
+    public void setDtinsert(Integer Long) {
+        this.dtinsert = dtinsert;
+    }
+
+    public Long getDtupdate() {
+        return dtupdate;
+    }
+
+    public void setDtupdate(Long dtupdate) {
+        this.dtupdate = dtupdate;
+    }
+
+    @PrePersist
+    public void prePersist(){
+         this.dtinsert = this.dtupdate = System.currentTimeMillis();
+    }
+
+    @PreUpdate
+    public void preUpdate(){
+        this.dtupdate = System.currentTimeMillis();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(mail, user.mail) && Objects.equals(dtinsert, user.dtinsert) && Objects.equals(dtupdate, user.dtupdate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, mail, dtinsert, dtupdate);
     }
 }

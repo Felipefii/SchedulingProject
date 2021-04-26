@@ -7,6 +7,7 @@ public class UserDTO {
     private String name;
     private String mail;
 
+
     public UserDTO of(User user){
         UserDTO userdto = new UserDTO();
         userdto.setName(user.getName());
@@ -29,4 +30,5 @@ public class UserDTO {
     public void setMail(String mail) {
         this.mail = mail;
     }
+
 }
