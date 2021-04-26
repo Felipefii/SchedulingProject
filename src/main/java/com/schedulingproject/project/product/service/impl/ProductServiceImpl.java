@@ -5,10 +5,12 @@ import com.schedulingproject.project.product.model.Product;
 import com.schedulingproject.project.product.repository.ProductRepository;
 import com.schedulingproject.project.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
