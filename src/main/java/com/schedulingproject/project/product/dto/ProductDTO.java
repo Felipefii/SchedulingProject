@@ -6,6 +6,7 @@ public class ProductDTO {
     private String name;
     private String description;
     private BigDecimal price;
+    private Long idcategory;
     private Long dtinsert;
     private Long dtupdate;
 
@@ -50,5 +51,13 @@ public class ProductDTO {
 
     public void setDtupdate(Long dtupdate) {
         this.dtupdate = dtupdate;
+    }
+
+    public Long getIdcategory() {
+        return idcategory;
+    }
+
+    public void setIdcategory(Long idcategory) {
+        this.idcategory = idcategory;
     }
 }

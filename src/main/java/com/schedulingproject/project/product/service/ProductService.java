@@ -11,7 +11,7 @@ public interface ProductService {
 
     List<Product> getAllProducts();
 
-    Product saveOne(ProductDTO productDTO);
+    Product saveOne(Product product);
 
     Optional<Product> findOneById(Long id);
 }

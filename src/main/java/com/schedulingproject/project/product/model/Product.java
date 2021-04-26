@@ -1,5 +1,6 @@
 package com.schedulingproject.project.product.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.schedulingproject.project.product.dto.ProductDTO;
 
 import javax.persistence.*;
@@ -15,6 +16,9 @@ public class Product {
     private String name;
     private String description;
     private BigDecimal price;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
+    private ProductCategory category;
     private Long dtinsert;
     private Long dtupdate;
 
@@ -69,6 +73,14 @@ public class Product {
         this.dtupdate = dtupdate;
     }
 
+    public ProductCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ProductCategory category) {
+        this.category = category;
+    }
+
     @PrePersist
     public void prePersist(){
         this.dtinsert = this.dtupdate = System.currentTimeMillis();
@@ -90,6 +102,15 @@ public class Product {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, description, price);
+    }
+
+    public Product of(ProductDTO productDTO, ProductCategory productCategory) {
+        Product product = new Product();
+        product.setDescription(productDTO.getDescription());
+        product.setName(productDTO.getName());
+        product.setPrice(productDTO.getPrice());
+        product.setCategory(productCategory);
+        return product;
     }
 
     public Product of(ProductDTO productDTO) {

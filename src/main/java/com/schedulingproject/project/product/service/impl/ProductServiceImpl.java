@@ -22,8 +22,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product saveOne(ProductDTO productDTO) {
-        Product product = new Product().of(productDTO);
+    public Product saveOne(Product product) {
         return productRepository.saveAndFlush(product);
     }
 
